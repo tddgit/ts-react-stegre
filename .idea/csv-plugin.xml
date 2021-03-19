@@ -297,6 +297,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/tsconfig.lint.json">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/wallaby.js">
           <value>
             <Attribute>

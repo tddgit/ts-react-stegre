@@ -1,5 +1,5 @@
 {
-    "include": ["./src/**/*.{ts,tsx}"],
+    "include": ["**/src/**/*.ts", "**/src/**/*.tsx", ".eslintrc.js"],
     "exclude": [
         "node_modules/*",
         "__sapper__/*",
@@ -25,7 +25,7 @@
         "forceConsistentCasingInFileNames": true,
         "allowJs": true,
         //        "jsx": "react",
-        "jsx": "preserve",
+        "jsx": "react",
         //        You can disable react style emit by using "jsx" : "preserve" option.
         //        This means that JSX is emitted as is and then you can use your own custom
         //        transpiler to transpile the JSX portions.
@@ -34,10 +34,12 @@
         "noFallthroughCasesInSwitch": true,
         "resolveJsonModule": true,
         //    "isolatedModules": true,
-        "noEmit": true,
+        "noEmit": false,
         "outDir": "lib",
         "declaration": true,
-        "declarationMap": true
+        "declarationMap": true,
+        "outDir": "./dist",
+        "baseUrl": "./"
 
         //        "target": "es5",                       /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */
         //        "module": "commonjs",                  /* Specify module code generation: 'commonjs', 'amd', 'system', 'umd' or 'es2015'. */
