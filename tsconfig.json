@@ -24,7 +24,7 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "allowJs": true,
-        //        "jsx": "react",
+        //        "jsx": "preserve",
         "jsx": "react",
         //        You can disable react style emit by using "jsx" : "preserve" option.
         //        This means that JSX is emitted as is and then you can use your own custom
@@ -35,7 +35,7 @@
         "resolveJsonModule": true,
         //    "isolatedModules": true,
         "noEmit": false,
-        "outDir": "lib",
+
         "declaration": true,
         "declarationMap": true,
         "outDir": "./dist",

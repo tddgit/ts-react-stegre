@@ -1,16 +1,9 @@
-module.exports = function (wallaby) {
+// eslint-disable-next-line func-names
+module.exports = function () {
     return {
-        files: [
-            'src/**/*.js',
-            'src/**/*.ts',
-            'src/**/*.coffee',
-        ],
+        files: ['src/**/*.js', 'src/**/*.ts', 'src/**/*.coffee'],
 
-        tests: [
-            'test/**/*Spec.js',
-            'test/**/*Spec.ts',
-            'test/**/*Spec.coffee',
-        ],
+        tests: ['test/**/*Spec.js', 'test/**/*Spec.ts', 'test/**/*Spec.coffee'],
         env: {
             type: 'node',
             // kind: 'chrome',

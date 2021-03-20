@@ -9,5 +9,8 @@
         "postcss --config path/to/your/config --replace",
         "npm run stylelint"
     ],
-    "*.{png,jpeg,jpg,gif,svg}": ["imagemin-lint-staged"]
+    "*.{png,jpeg,jpg,gif,svg}": ["imagemin-lint-staged"],
+    "compilerOptions": {
+        "jsx": "react"
+    }
 }

@@ -18,6 +18,7 @@ const plugins = [
         '@babel/plugin-proposal-decorators',
         {
             decoratorsBeforeExport: true,
+            legacy: true,
         },
     ],
     '@babel/plugin-proposal-class-static-block',
@@ -78,7 +79,7 @@ module.exports = {
                 },
             },
         ],
-        // 'babel-preset-gatsby',
+        'babel-preset-gatsby',
     ],
     plugins,
 };

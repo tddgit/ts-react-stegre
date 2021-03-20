@@ -9,6 +9,11 @@
   "arrowParens": "always",
   "tabs": false,
   "trailingComma": "all",
+  "cssEnable": [
+  "css",
+  "less",
+  "sass"
+],
   "svelteSortOrder": "options-scripts-markup-styles",
   "svelteStrictMode": true,
   "svelteBracketNewLine": false,

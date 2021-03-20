@@ -12,6 +12,11 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const { ESBuildMinifyPlugin } = require('esbuild-loader');
+const { ProvidePlugin } = require('webpack');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
+
 require('dotenv').config();
 
 const PATHS = require('./webpack-paths');
@@ -36,16 +41,18 @@ const optimization = () => {
         //         },
         //     },
         // },
-        minimize: true,
+        minimize: false,
         // runtimeChunk: {
         //     name: 'runtime',
         // },
         // TODO: What it is runtimeChunk?
         minimizer: [
-            new TerserPlugin({
-                test: /\.js(\?.*)?$/i,
-                parallel: true,
-            }),
+            // new TerserPlugin({
+            //     // eslint-disable-next-line security/detect-unsafe-regex
+            //     test: /\.js(\?.*)?$/i,
+            //     parallel: true,
+            // }),
+            new ESBuildMinifyPlugin(),
             new CssMinimizerPlugin(),
         ],
     };
@@ -54,10 +61,8 @@ const optimization = () => {
 };
 
 const plugins = [
-    // new VueLoaderPlugin(),
-    new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-    }),
+    new VueLoaderPlugin(),
+
     new webpack.EnvironmentPlugin({}),
     new Dotenv({
         path: './.env', // Path to .env file (this is the default)
@@ -86,16 +91,33 @@ const plugins = [
         },
     }),
     new CleanWebpackPlugin(),
+    new ProvidePlugin({
+        React: 'react',
+        Vue: ['vue/dist/vue.esm.js', 'default'],
+    }),
 ];
 
 if (!isDevelopment) {
+    plugins.push(
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production'),
+        }),
+    );
     plugins.push(
         new CompressionPlugin({
             algorithm: 'gzip',
         }),
     );
     plugins.push(new webpack.HotModuleReplacementPlugin());
-    plugins.push(new BundleAnalyzerPlugin());
+    plugins.push(
+        new BundleAnalyzerPlugin({
+            openAnalyzer: true,
+            analyzerPort: 3005,
+        }),
+    );
+    plugins.push(new WebpackManifestPlugin());
+    plugins.push(new GenerateSW());
+
     plugins.push(new CopyWebpackPlugin([{ from: './public', to: './' }]));
 } else {
     plugins.push(new ReactRefreshWebpackPlugin());
@@ -120,7 +142,15 @@ if (!isDevelopment) {
             process: 'process/browser',
         }),
     );
-    // plugins.push(new BundleAnalyzerPlugin());
+    // plugins.push(
+    //     new webpack.WatchIgnorePlugin({ paths: [/\.js$/, /\.d\.ts$/] }),
+    // );
+    plugins.push(
+        new BundleAnalyzerPlugin({
+            openAnalyzer: false,
+            analyzerPort: 3003,
+        }),
+    );
 }
 
 module.exports = {
@@ -153,6 +183,7 @@ module.exports = {
         historyApiFallback: true,
         stats: 'minimal',
         port: 3000,
+        open: false,
         // after() {},
         hot: true,
         watchContentBase: true,
@@ -160,7 +191,6 @@ module.exports = {
         // publicPath: 'http://localhost:9000',
         inline: true,
         clientLogLevel: 'silent',
-        open: true,
     },
     optimization: optimization(),
 
@@ -199,6 +229,14 @@ module.exports = {
                 include: [PATHS.src],
                 use: ['source-map-loader', 'babel-loader'],
             },
+            // {
+            //     test: /\.{js,jsx}$/,
+            //     loader: 'esbuild-loader',
+            //     options: {
+            //         loader: 'jsx', // Remove this if you're not using JSX
+            //         target: 'es2015', // Syntax to compile to (see options below for possible values)
+            //     },
+            // },
             // =================BASIC TYPESCRIPT OPTIONS===============
             // {
             //     test: /\.(ts|tsx)$/,
@@ -212,30 +250,38 @@ module.exports = {
                 test: /\.(ts|tsx)$/,
                 include: [PATHS.src],
                 use: [
+                    'angular2-template-loader',
                     {
                         loader: 'ts-loader',
                         options: {
                             appendTsSuffixTo: [/\.vue$/],
                         },
                     },
-                    'angular2-template-loader',
                 ],
             },
-            //= =======================================================
             // {
-            //     test: /\.vue$/,
-            //     exclude: /node_modules/,
-            //     include: [PATHS.src],
-            //     // use: 'vue-loader',
-            //     loader: 'vue-loader',
+            //     test: /\.tsx?$/,
+            //     loader: 'esbuild-loader',
             //     options: {
-            //         loaders: {
-            //             scss: 'vue-style-loader!css-loader!sass-loader', // <style lang="scss">
-            //             sass:
-            //                 'vue-style-loader!css-loader!sass-loader?indentedSyntax', // <style lang="sass">
-            //         },
+            //         loader: 'tsx', // Or 'ts' if you don't need tsx
+            //         target: 'es2015',
             //     },
             // },
+            //= =======================================================
+            {
+                test: /\.vue$/,
+                exclude: /node_modules/,
+                include: [PATHS.src],
+                // use: 'vue-loader',
+                loader: 'vue-loader',
+                options: {
+                    loaders: {
+                        scss: 'vue-style-loader!css-loader!sass-loader', // <style lang="scss">
+                        sass:
+                            'vue-style-loader!css-loader!sass-loader?indentedSyntax', // <style lang="sass">
+                    },
+                },
+            },
             {
                 test: /\.less$/,
                 exclude: /node_modules/,

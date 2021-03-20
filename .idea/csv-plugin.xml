@@ -24,10 +24,24 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="$APPLICATION_CONFIG_DIR$/scratches/EventEmitter.js">
+          <value>
+            <Attribute>
+              <option name="separator" value="&#9;" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="$APPLICATION_CONFIG_DIR$/scratches/scratch_1.js">
           <value>
             <Attribute>
               <option name="separator" value="&#9;" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../node_modules/@types/react/index.d.ts">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
             </Attribute>
           </value>
         </entry>
@@ -143,6 +157,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/src/classes/UserSearch.tsx">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/src/components/Search.js">
           <value>
             <Attribute>
@@ -158,6 +179,13 @@
           </value>
         </entry>
         <entry key="/src/components/footer.js">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/src/events/EventComponent.tsx">
           <value>
             <Attribute>
               <option name="separator" value=";" />
@@ -199,6 +227,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/src/index.tsx">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/src/js/index.js">
           <value>
             <Attribute>
@@ -221,6 +256,13 @@
           </value>
         </entry>
         <entry key="/src/public/index.html">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/src/public/style.css">
           <value>
             <Attribute>
               <option name="separator" value=":" />
