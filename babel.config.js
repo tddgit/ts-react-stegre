@@ -33,6 +33,7 @@ const plugins = [
     'dynamic-import-node',
     'transform-export-extensions',
     '@emotion',
+    'effector/babel-plugin',
     [
         '@babel/plugin-transform-react-jsx',
         {

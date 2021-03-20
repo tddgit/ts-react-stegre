@@ -112,7 +112,7 @@ if (!isDevelopment) {
     plugins.push(
         new BundleAnalyzerPlugin({
             openAnalyzer: true,
-            analyzerPort: 3005,
+            analyzerPort: 3002,
         }),
     );
     plugins.push(new WebpackManifestPlugin());
@@ -148,7 +148,7 @@ if (!isDevelopment) {
     plugins.push(
         new BundleAnalyzerPlugin({
             openAnalyzer: false,
-            analyzerPort: 3003,
+            analyzerPort: 3001,
         }),
     );
 }
